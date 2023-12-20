@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gestorentrevistas-b79fd": {
+      "hosting": {
+        "examenSegundaAngular": [
+          "gestorentrevistas-b79fd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gestorentrevistas-b79fd"
+  }
+}

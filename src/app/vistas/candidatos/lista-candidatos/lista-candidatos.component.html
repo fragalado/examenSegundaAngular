@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col">
+        <table class="table table-bordered table-hover" style="box-shadow:-9px 9px 33px 0px rgba(0,0,0,0.75);">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Dni</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Mail</th>
+                <th scope="col">Fecha Nacimiento</th>
+                <th scope="col">Del/Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let candidato of candidatos; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{candidato.nombre}}</td>
+                <td>{{candidato.apellidos}}</td>
+                <td>{{candidato.dni}}</td>
+                <td>{{candidato.direccion}}</td>
+                <td>{{candidato.telefono}}</td>
+                <td>{{candidato.mail}}</td>
+                <td>{{candidato.fechaNacimiento}}</td>
+                <td>
+                  <i class="bi bi-trash text-danger" style="margin-left: 8px;" (click)="eliminaCandidato(candidato.id!)"></i>
+                  <i class="bi bi-pencil-square text-success" style="margin-left: 10px;" routerLink="/candidatos/detalle/{{candidato.id}}"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col text-center my-4">
+        <button type="button" class="btn btn-primary" routerLink="/candidatos/agregar">Agregar</button>
+    </div>
+</div>

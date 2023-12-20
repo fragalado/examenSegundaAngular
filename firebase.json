@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "examenSegundaAngular",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

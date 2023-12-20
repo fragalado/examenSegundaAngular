@@ -1,0 +1,32 @@
+<form [formGroup]="formCandidato" (submit)="enviar()">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" formControlName="nombre">
+    </div>
+    <div class="mb-3">
+        <label for="apellidos" class="form-label">Apellidos</label>
+        <input type="text" class="form-control" id="apellidos" name="apellidos" formControlName="apellidos">
+    </div>
+    <div class="mb-3">
+        <label for="dni" class="form-label">Dni</label>
+        <input type="text" class="form-control" id="dni" name="dni" formControlName="dni">
+    </div>
+    <div class="mb-3">
+        <label for="direccion" class="form-label">Direccion</label>
+        <input type="text" class="form-control" id="direccion" name="direccion" formControlName="direccion">
+    </div>
+    <div class="mb-3">
+        <label for="telefono" class="form-label">Telefono</label>
+        <input type="text" class="form-control" id="telefono" name="telefono" formControlName="telefono">
+    </div>
+    <div class="mb-3">
+        <label for="mail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="mail" name="mail" formControlName="mail">
+    </div>
+    <div class="mb-3">
+        <label for="fechaNacimiento" class="form-label">Fecha Nacimiento</label>
+        <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" formControlName="fechaNacimiento">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!formCandidato.valid">Enviar</button>
+    <button type="button" class="btn btn-secondary" style="float: right;" routerLink="/candidatos/listado">Volver</button>
+</form>
