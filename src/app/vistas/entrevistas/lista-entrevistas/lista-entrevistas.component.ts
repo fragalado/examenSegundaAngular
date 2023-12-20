@@ -3,7 +3,8 @@ import { Candidato } from 'src/app/modelos/candidato';
 import { DatosEntrevista, Entrevista } from 'src/app/modelos/entrevista';
 import { Puesto } from 'src/app/modelos/puesto';
 import { DatabaseService } from 'src/app/servicios/database.service';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-lista-entrevistas',
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./lista-entrevistas.component.css']
 })
 export class ListaEntrevistasComponent {
-
+  chart: any;
   candidatos?: Candidato[];
   puestos?: Puesto[];
   datosEntrevista?: DatosEntrevista[];
@@ -94,6 +95,44 @@ export class ListaEntrevistasComponent {
           icon: "error"
         });
       }
+    });
+  }
+
+  // Muestra la grafica en la vista
+  graficoPuestos(){
+    // Cogemos todos los puestos y añadimos en un array todos los nombres de los puestos
+    const arrayPuestos: string[] = [];
+    this.puestos?.forEach(puesto => arrayPuestos.push(puesto.puesto));
+
+    // Recorremos el arrayPuestos y contamos cada puesto en el array entrevistas
+    // De esta maneras si encontramos dos puestos en el array de entrevistas con el mismo nombre quiere decir que hay dos candidatos
+    const arrayData: string[] = [];
+    arrayPuestos.forEach(element => {
+      var contador = 0;
+      this.entrevistas.forEach(element2 => {
+        if(element == element2.puesto.puesto)
+          contador++;
+      });
+      arrayData.push(contador.toString());
+    });
+
+    this.chart = new Chart("myChart", {
+      type: 'bar', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: arrayPuestos, 
+	       datasets: [
+          {
+            label: "Número de candidatos",
+            data: arrayData,
+            backgroundColor: 'blue'
+          } 
+        ]
+      },
+      options: {
+        aspectRatio:2.5
+      }
+      
     });
   }
 }
