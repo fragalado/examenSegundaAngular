@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Candidato } from 'src/app/modelos/candidato';
 import { DatabaseService } from 'src/app/servicios/database.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-detalle-candidato',
@@ -73,14 +74,30 @@ export class DetalleCandidatoComponent {
   // Método que actualiza un candidato en la base de datos
   actualizaCandidato(){
     this.dbs.updateDocument(this.candidato, "candidatos")
-      .then()
-      .catch();
+      .then(() => Swal.fire({
+        title: "Actualizado",
+        text: "El candidato se ha actualizado",
+        icon: "success"
+      }))
+      .catch(() => Swal.fire({
+        title: "Oops...",
+        text: "El candidato no se ha actualizado",
+        icon: "error"
+      }));
   }
 
   // Método que crea un candidato en la base de datos
   creaCandidato(){
     this.dbs.newDocument(this.candidato, "candidatos")
-      .then()
-      .catch();
+      .then(() => Swal.fire({
+        title: "Creado",
+        text: "El candidato se ha creado",
+        icon: "success"
+      }))
+      .catch(() => Swal.fire({
+        title: "Oops..",
+        text: "El candidato no se ha creado",
+        icon: "error"
+      }));
   }
 }

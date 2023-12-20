@@ -1,1 +1,26 @@
-<p>detalle-entrevista works!</p>
+<form>
+    <div class="mb-3">
+        <label for="fechaEntrevista" class="form-label">Fecha Entrevista</label>
+        <input type="date" class="form-control" id="fechaEntrevista" name="fechaEntrevista" [(ngModel)]="datosEntrevista.fechaEntrevista">
+    </div>
+    <div class="mb-3">
+        <label for="candidato" class="form-label">Candidato</label>
+        <select id="candidato" class="form-select" [(ngModel)]="datosEntrevista.idCandidato" name="candidato">
+            <option *ngIf="selectedCandidato" [ngValue]="selectedCandidato.id" selected>{{selectedCandidato.nombre}} {{selectedCandidato.apellidos}}</option>
+            <option *ngFor="let candidato of candidatos" [ngValue]="candidato.id">{{candidato.nombre}} {{candidato.apellidos}}</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="puesto" class="form-label">Puesto</label>
+        <select id="puesto" class="form-select" [(ngModel)]="datosEntrevista.idPuesto" name="puesto">
+            <option *ngIf="selectedPuesto" [ngValue]="selectedPuesto.id" selected>{{selectedPuesto.puesto}} | {{selectedPuesto.empresa}}</option>
+            <option *ngFor="let puesto of puestos" [ngValue]="puesto.id">{{puesto.puesto}} | {{puesto.empresa}}</option>
+        </select>
+    </div>
+    <div class="form-check">
+        <label class="form-check-label" for="realizada">Realizada</label>
+        <input class="form-check-input" type="checkbox" id="realizada" [checked]="datosEntrevista.realizada" (change)="datosEntrevista.realizada = !datosEntrevista.realizada">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="enviar()">Enviar</button>
+    <button type="button" class="btn btn-secondary" style="float: right;" routerLink="/entrevistas/listado">Volver</button>
+</form>

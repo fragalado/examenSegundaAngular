@@ -1,0 +1,16 @@
+<form [formGroup]="formPuesto" (submit)="enviar()">
+    <div class="mb-3">
+        <label for="puesto" class="form-label">Puesto</label>
+        <input type="text" class="form-control" id="puesto" name="puesto" formControlName="puesto">
+    </div>
+    <div class="form-check">
+        <label class="form-check-label" for="disponible">Disponible</label>
+        <input class="form-check-input" type="checkbox" id="disponible" formControlName="disponible">
+    </div>
+    <div class="mb-3">
+        <label for="empresa" class="form-label">Empresa</label>
+        <input type="text" class="form-control" id="empresa" name="empresa" formControlName="empresa">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!formPuesto.valid">Enviar</button>
+    <button type="button" class="btn btn-secondary" style="float: right;" routerLink="/puestos/listado">Volver</button>
+</form>

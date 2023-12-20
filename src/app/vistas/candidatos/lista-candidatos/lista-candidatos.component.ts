@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Candidato } from 'src/app/modelos/candidato';
 import { DatabaseService } from 'src/app/servicios/database.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-candidatos',
@@ -23,8 +24,39 @@ export class ListaCandidatosComponent {
 
   // Método que elimina un candidato en la base de datos
   eliminaCandidato(id: string){
-    this.dbs.deleteDocument(id, "candidatos")
-      .then()
-      .catch();
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success ms-2",
+        cancelButton: "btn btn-danger me-2"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "¿Estas seguro?",
+      text: "No podrás revertir los cambios!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si, eliminar!",
+      cancelButtonText: "No, cancelar!",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.dbs.deleteDocument(id, "candidatos")
+          .then(() => swalWithBootstrapButtons.fire({
+            title: "Borrado!",
+            text: "El candidato ha sido borrado",
+            icon: "success"
+          }));
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Cancelado",
+          text: "El candidato no ha sido borrado",
+          icon: "error"
+        });
+      }
+    });
   }
 }

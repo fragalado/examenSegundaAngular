@@ -1,1 +1,44 @@
-<p>lista-entrevistas works!</p>
+<div class="row">
+    <div class="col">
+        <table class="table table-bordered table-hover" style="box-shadow:-9px 9px 33px 0px rgba(0,0,0,0.75);">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Fecha Entrevista</th>
+                <th scope="col">Candidato</th>
+                <th scope="col">Puesto</th>
+                <th scope="col">Realizada</th>
+                <th scope="col">Del/Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let entrevista of entrevistas; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{entrevista.fechaEntrevista}}</td>
+                <td>{{entrevista.candidato.nombre}} {{entrevista.candidato.apellidos}}</td>
+                <td>{{entrevista.puesto.puesto}} | {{entrevista.puesto.empresa}}</td>
+                <th scope="row" *ngIf="!entrevista.realizada"><span style="color: red;">No realizada</span></th>
+                <th scope="row" *ngIf="entrevista.realizada"><span style="color: Green;">Realizada</span></th>
+                <td>
+                  <i class="bi bi-trash text-danger" style="margin-left: 8px;" (click)="eliminaEntrevista(entrevista.id!)"></i>
+                  <i class="bi bi-pencil-square text-success" style="margin-left: 10px;" routerLink="/entrevistas/detalle/{{entrevista.id}}"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col text-center my-4">
+        <button type="button" class="btn btn-primary" routerLink="/entrevistas/agregar">Agregar</button>
+    </div>
+</div>
+
+<div class="row my-5">
+  <div class="col-12">
+    <h2>Gráfico de Puestos con número de candidatos</h2>
+  </div>
+  <div class="col-12">
+    
+  </div>
+</div>

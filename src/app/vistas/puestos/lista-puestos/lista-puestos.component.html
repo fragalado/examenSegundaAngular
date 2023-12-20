@@ -1,1 +1,33 @@
-<p>lista-puestos works!</p>
+<div class="row">
+    <div class="col">
+        <table class="table table-bordered table-hover" style="box-shadow:-9px 9px 33px 0px rgba(0,0,0,0.75);">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Puesto</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Disponible</th>
+                <th scope="col">Del/Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let puesto of puestos; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{puesto.puesto}}</td>
+                <td>{{puesto.empresa}}</td>
+                <th scope="row" *ngIf="!puesto.disponible"><span style="color: red;">No disponible</span></th>
+                <th scope="row" *ngIf="puesto.disponible"><span style="color: Green;">Disponible</span></th>
+                <td>
+                  <i class="bi bi-trash text-danger" style="margin-left: 8px;" (click)="eliminaPuesto(puesto.id!)"></i>
+                  <i class="bi bi-pencil-square text-success" style="margin-left: 10px;" routerLink="/puestos/detalle/{{puesto.id}}"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col text-center my-4">
+        <button type="button" class="btn btn-primary" routerLink="/puestos/agregar">Agregar</button>
+    </div>
+</div>
